@@ -18,7 +18,8 @@ public class CLI {
 		Input inpute = new Input();
 		try {
 			inpute.initialiseEmojiList(emojiFilepath);
-			inpute.printEmojiList();
+			// inpute.printEmojiList();
+			inpute.buildEmojiHashtable();
 		} catch (Exception e) {
 			System.out.println(emojiFilepath + " file not found. or file I/O error occured");
 		}

@@ -59,13 +59,13 @@ public class Input {
 			Emoji e = new Emoji(cldrShortName, unicodeCodeArray, keywordsArray, emojiChar);
 			this.emojis.put(cldrShortName, e);
 		}
-		Set<String> keys = this.emojis.keySet();
+		/* Set<String> keys = this.emojis.keySet();
 		for (String s: keys) {
 			// System.out.println(s + ":");
 			emojis.get(s).printEmojiName();
 			emojis.get(s).printEmojiChar();
 			emojis.get(s).printEmojiCode();
 			System.out.println("");
-		}
+		} */
 	}
 }

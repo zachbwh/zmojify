@@ -8,7 +8,8 @@ public class Search {
 		Set<String> keys = emojiList.keySet();
 		for (String s: keys) {
 			if (emojiList.get(s).keywordsContainWord(search)) {
-				
+				emojiList.get(s).printEmojiChar();
+				System.out.println("\n");
 			}
 		}
 	}

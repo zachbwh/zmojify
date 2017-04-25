@@ -1,9 +1,15 @@
 # Zmojiboard
 Zmojiboard aims to be a lightweight, effiecient means of finding emoji natively on desktop.
 
-Currently the program only supports a CLI interface written in java but in the future I hope it becomes graphical (possibly based on electron).
+Currently the program only supports a CLI interface written in java but in the future I hope it will become graphical (possibly based on electron).
+
+## Current Features
+ * Multilingual Search
+
 ## //TODO
  * ~~Update README.md~~
+ * List by frequency of use.
+ * List by category.
 
 ## Usage
 ```bash

@@ -5,15 +5,11 @@ import java.util.ArrayList;
 public class Emoji {
 	private String _cldrShortName;
 	private final String _emojiChar;
-	// private final String[] _unicodeCode;
 	private ArrayList<String> _keywords = new ArrayList<String>();
 	private int _totalUses;
 	
 	public Emoji(String emojiChar) {
-		// this._cldrShortName = cldrShortName;
-		// this._unicodeCode = unicodeCode;
 		this._emojiChar = emojiChar;
-		// _keywords.add(cldrShortName);
 	}
 	public Emoji(String emojiChar, ArrayList<String> keywords) {
 		this._emojiChar = emojiChar;
@@ -39,13 +35,6 @@ public class Emoji {
 		return this._cldrShortName;
 	}
 	
-	/* public void printEmojiCode() {
-		for (int i = 0; i < _unicodeCode.length; i++) {
-			System.out.print("\\u" + this._unicodeCode[i] + " ");
-		}
-		// System.out.print("\n");
-	} */
-	
 	public String getEmojiChar() {
 		return this._emojiChar;
 	}
@@ -59,19 +48,10 @@ public class Emoji {
 		return false;
 	}
 	
-	/* public void addKeywords(ArrayList<String> keywords) {
-		for(String str: keywords) {
-			if(!this._keywords.contains(str)) {
-				this._keywords.add(str);
-			}
-		}
-	} */
-	
 	public void addKeywords(String[] keywords) {
 		for (int i = 0; i < keywords.length; i++) {
 			if (!this._keywords.contains(keywords[i])) {
 				this._keywords.add(keywords[i]);
-				System.out.println(keywords[i]);
 			}
 		}
 	}
@@ -82,8 +62,16 @@ public class Emoji {
 	}
 	
 	public void printKeywords() {
+		System.out.print("keywords: ");
 		for (String s: this._keywords) {
 			System.out.print(s + ", ");
 		}
+	}
+	
+	public void printEmoji() {
+		System.out.print("emojiChar: " + this._emojiChar + ",\t");
+		System.out.print("cldrShortName: " + this._cldrShortName + ",\t");
+		this.printKeywords();
+		System.out.print("\n");
 	}
 }

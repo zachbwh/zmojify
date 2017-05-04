@@ -22,6 +22,7 @@ java -jar zmojiboard.jar --search *language* *search string*
 OR
 ```bash
 java -jar zmojiboard.jar -s *language* *search string*
+```
 
 e.g.
 ```bash

@@ -3,6 +3,7 @@ package backend;
 import java.io.File;
 import java.util.Hashtable;
 
+// import java.net.URL;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
@@ -16,6 +17,11 @@ public class Input {
 	
 	public void buildEmojiHashtable(String filepath) {
 		try {
+			/* System.out.println(filepath);
+			ClassLoader cl = this.getClass(). getClassLoader();
+			System.out.println("1");
+			File inputFile = new File(cl.getResource(filepath).getFile());
+			System.out.println("2"); */
 			File inputFile = new File(filepath);
 			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder builder = factory.newDocumentBuilder();
@@ -42,6 +48,34 @@ public class Input {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+	}
+	public void chooseQuery(String[] inputArgs) {
+		//Should throw an invalid input exception
+		/*if (inputArgs[0] == "search") {
+			if (inputArgs.length == 3) {
+				Search searchInstance = new Search();
+				searchInstance.keywordSearch(this.emojis, inputArgs[2]);
+			} else {
+				System.out.println("No Search Term");
+			}
+		} */
+		String query = inputArgs[0];
+		switch(query) {
+		case "--search":
+			if (inputArgs.length == 3) {
+				String search = inputArgs[2];
+				Search searchInstance = new Search();
+				searchInstance.keywordSearch(this.emojis, search);
+				break;
+			}
+		case "-s":
+			if (inputArgs.length == 3) {
+				String search = inputArgs[2];
+				Search searchInstance = new Search();
+				searchInstance.keywordSearch(this.emojis, search);
+				break;
+			}
 		}
 	}
 }

@@ -17,12 +17,23 @@ Currently the program only supports a CLI interface written in java but in the f
 
 ## Usage
 ```bash
-java -jar Zmojiboard.jar search *language* *query*`
-````
+java -jar zmojiboard.jar --search *language* *search string*
+```
+OR
+```bash
+java -jar zmojiboard.jar -s *language* *search string*
 
 e.g.
 ```bash
-java -jar Zmojiboard.jar search en 100
+java -jar zmojiboard.jar --search en 100
 ```
 Output:
 `💯`
+
+### Languages
+A list of the available languages can be extracted from the .xml filenames.
+For Example:
+de ---> German
+ru ---> Russian
+ar ---> Arabic
+etc.

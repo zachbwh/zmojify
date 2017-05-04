@@ -32,8 +32,16 @@ Output:
 
 ### Languages
 A list of the available languages can be extracted from the .xml filenames.
+
 For Example:
+
 de ---> German
+
 ru ---> Russian
+
 ar ---> Arabic
+
 etc.
+
+## Acknowledgments
+The language .xml files are not created by me but can be found on the [Unicode Consortium](http://www.unicode.org/repos/cldr/tags/latest/common/annotations/) website

@@ -14,6 +14,8 @@ import org.w3c.dom.NodeList;
 
 public class Input {
 	public Hashtable<String, Emoji> emojis = new Hashtable<String, Emoji>();
+
+	public Hashtable<String, String> _commands = new Hashtable<String, String>();
 	
 	public void buildEmojiHashtable(String filepath) {
 		try {
@@ -51,31 +53,58 @@ public class Input {
 		}
 	}
 	public void chooseQuery(String[] inputArgs) {
-		//Should throw an invalid input exception
-		/*if (inputArgs[0] == "search") {
-			if (inputArgs.length == 3) {
-				Search searchInstance = new Search();
-				searchInstance.keywordSearch(this.emojis, inputArgs[2]);
-			} else {
-				System.out.println("No Search Term");
-			}
-		} */
-		String query = inputArgs[0];
+		this._commands.put("-s", 				"-s");
+		this._commands.put("--search",			"-s");
+		this._commands.put("-z",				"-z");
+		this._commands.put("--zmojify-search",	"-z");
+		this._commands.put("-h",				"-h");
+		this._commands.put("--help",			"-h");
+		this._commands.put("-l",				"-l");
+		this._commands.put("--list-languages",	"-l");
+		
+		String query = _commands.get(inputArgs[0]);
 		switch(query) {
-		case "--search":
-			if (inputArgs.length == 3) {
-				String search = inputArgs[2];
-				Search searchInstance = new Search();
-				searchInstance.keywordSearch(this.emojis, search);
-				break;
-			}
 		case "-s":
 			if (inputArgs.length == 3) {
+				String language = inputArgs[1];;
+				String filepath = "languages/" + language + ".xml";
+				this.buildEmojiHashtable(filepath);
 				String search = inputArgs[2];
 				Search searchInstance = new Search();
 				searchInstance.keywordSearch(this.emojis, search);
-				break;
+				searchInstance.printFoundEmojis();
 			}
+			break;
+		case "-z":
+			if (inputArgs.length == 3) {
+				String language = inputArgs[1];;
+				String filepath = "languages/" + language + ".xml";
+				this.buildEmojiHashtable(filepath);
+				String search = inputArgs[2];
+				Search searchInstance = new Search();
+				searchInstance.zmojiSearch(this.emojis, search);
+				searchInstance.printFoundEmojis();
+			}
+			break;
+		case "-h":
+			System.out.println("usage:  java -jar zmojify.jar <operation> <language> <query>");
+			System.out.println("operations:");
+			System.out.println("    java -jar zmojify.jar {-h --help}");
+			System.out.println("    java -jar zmojify.jar {-s --search} <language> <query>");
+			System.out.println("    java -jar zmojify.jar {-z --zmojify-search} <language> <query>");
+			System.out.println("	java -jar zmojify.jar {-l --list-languages}");
+			break;
+		case "-l":
+			File langFolder = new File("languages/");
+			File[] langFileList = langFolder.listFiles();
+			String[] splitFilename;
+			for (int i = 0; i < langFileList.length; i++) {
+				if (langFileList[i].isFile()) {
+					splitFilename = langFileList[i].getName().split("\\.");
+					System.out.println(splitFilename[0]);
+				}
+			}
+			break;
 		}
 	}
 }

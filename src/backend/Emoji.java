@@ -48,6 +48,15 @@ public class Emoji {
 		return false;
 	}
 	
+	public boolean keywordContainsExactWord(String word) {
+		for (int i = 0; i< this._keywords.size(); i++) {
+			if (_keywords.get(i).toLowerCase().equals(word.toLowerCase())) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	public void addKeywords(String[] keywords) {
 		for (int i = 0; i < keywords.length; i++) {
 			if (!this._keywords.contains(keywords[i])) {

@@ -89,9 +89,9 @@ public class Input {
 		case "-h":
 			System.out.println("usage:  java -jar zmojify.jar <operation> <language> <query>");
 			System.out.println("operations:");
-			System.out.println("    java -jar zmojify.jar {-h --help}");
-			System.out.println("    java -jar zmojify.jar {-s --search} <language> <query>");
-			System.out.println("    java -jar zmojify.jar {-z --zmojify-search} <language> <query>");
+			System.out.println("	java -jar zmojify.jar {-h --help}");
+			System.out.println("	java -jar zmojify.jar {-s --search} <language> <query>");
+			System.out.println("	java -jar zmojify.jar {-z --zmojify-search} <language> <query>");
 			System.out.println("	java -jar zmojify.jar {-l --list-languages}");
 			break;
 		case "-l":

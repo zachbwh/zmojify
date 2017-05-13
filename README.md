@@ -13,6 +13,7 @@ Currently the program only supports a CLI interface written in java but in the f
  * ~~List available languages~~
  * Retrieve keywords by cldrShortName and emojiChar
  * Add comments
+ * ommit emojis without font support
 
 ## Usage
 ```bash

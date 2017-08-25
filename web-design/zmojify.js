@@ -153,7 +153,8 @@ function handleKeyPress (event, query) {
     selected_emoji.nextElementSibling.nextElementSibling.id = "emoji-select";
     selected_emoji.id = "emoji-deselect";
   } else {
-      console.log(search(query, "en"));
+      results = search(query, "en");
+      document.getElementById("output").innerHTML = results[0];
   }
 }
 

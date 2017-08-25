@@ -99,7 +99,7 @@ function getLanguageData(languageIndex) {
       console.log("success apparently")
     }
   }
-  languageRequest.open("GET", "http://localhost/zmojify/languages/" + languages[languageIndex][0] + ".xml", true);
+  languageRequest.open("GET", "http://zmojify.io/languages/" + languages[languageIndex][0] + ".xml", true);
   languageRequest.send();
 }
 

@@ -95,6 +95,7 @@ function getLanguageData(languageIndex) {
       parser = new DOMParser();
       var languageData = parser.parseFromString(this.responseText,"text/xml");
       languages[languageIndex][2] = languageData;
+      currentLanguage[2] = languageData;
     }
   }
   languageRequest.open("GET", "http://zmojify.io/languages/" + languages[languageIndex][0] + ".xml", true);

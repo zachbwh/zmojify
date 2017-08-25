@@ -64,51 +64,13 @@ div.inline {
 
 }
 </style>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-<script type="text/javascript" language="javascript">
-function handleQuery (event, query) {
-  //var eventWhich = event.which;
-  console.log(event.which);
-  var selected_emoji = document.getElementById("emoji-select");
-  if (event.which == 38) { // up arrow key
-    console.log(selected_emoji);
-    console.log(selected_emoji.innerHTML);
-    selected_emoji.previousElementSibling.previousElementSibling.id = "emoji-select";
-    selected_emoji.id = "emoji-deselect";
-  } else if (event.which == 40) { // down arrow key
-    //console.log(document.getElementById("emoji-select").nextElementSibling.id);
-    console.log(selected_emoji);
-    console.log(selected_emoji.innerHTML);
-    selected_emoji.nextElementSibling.nextElementSibling.id = "emoji-select";
-    selected_emoji.id = "emoji-deselect";
-    //document.getElementById("emoji-select").nextElementSibling.id = "emoji-select";
-    //document.getElementById("emoji-select").id = "emoji-deselect";
-    //console.log("down");
-  } else {
-    var emojis = [];
-    var select_emojis = [];
-    $.get('http://localhost:8081', query, function(data) {
-      emojis = data.split("\n");
-      var output = "";
-      for (i = 0; i < emojis.length -1; i++) {
-        if (i == 0) {
-          output += "<span id=\"emoji-select\">" + emojis[i] + "</span><br>";
-          //output += "<button class=\"text\" id=\"emoji-select\" onclick=\"copyToClipboard(document.getElementById(\'emoji-select\').innerHTML)\">" + emojis[i] + "</button><br>";
-        } else {
-          output += "<span id=\"emoji-deselect\">" + emojis[i] + "</span><br>";
-        }
-      }
-      document.getElementById('output').innerHTML = output;
-      console.log(output);
-      //console.log(data);
-    });
-  }
-}
-</script>
 <html>
 <head>
   <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
   <meta charset="utf-8">
+  <script
+    src="./zmojify.js"
+    crossorigin="anonymous"></script>
   <title>
     zmojify.io
   </title>
@@ -118,20 +80,9 @@ function handleQuery (event, query) {
   <div style="text-align:center">
     <h2>
       <br><br><br><br><span class="text">Search</span>
-      <input id="search" type="text" value="" autocomplete="off" placeholder="emoji" onkeyup="javascript:handleQuery(event,this.value);" autofocus></input>
+      <input id="search" type="text" value="" autocomplete="off" placeholder="emoji" onkeyup="javascript:handleKeyPress(event,this.value);" autofocus></input>
       <div class="inline" id="output" style="background-color: green"></div>
       <button style="float: none; vertical-align: inherit" type="text" id="btn" onmousedown="console.log(getElementById('emoji-select').innerHTML)" data-clipboard-target=#emoji-select>Copy</button>
-      <script src="../clipboard.js-master/dist/clipboard.min.js"></script>
-      <script>
-      var btn = document.getElementById('btn');
-      var clipboard = new Clipboard(btn);
-      clipboard.on('success', function(e) {
-          console.log(e);
-      });
-      clipboard.on('error', function(e) {
-          console.log(e);
-      });
-      </script>
     </h2>
   </div>
   <div id="about" style="bottom: 5px; position: absolute; width: 99%;">

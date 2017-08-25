@@ -1,6 +1,6 @@
 
 currentLanguage = ["en", "English"]
-
+currentLanguageData = "";
 
 languages = [
   ["af", "Afrikaans"],
@@ -95,15 +95,66 @@ function getLanguageData(languageIndex) {
       parser = new DOMParser();
       var languageData = parser.parseFromString(this.responseText,"text/xml");
       languages[languageIndex][2] = languageData;
-      currentLanguage[2] = languageData;
+      currentLanguageData = languageData;
+      console.log("success apparently")
     }
   }
-  languageRequest.open("GET", "http://zmojify.io/languages/" + languages[languageIndex][0] + ".xml", true);
-  languageRequest.setRequestHeader("Access-Control-Allow-Origin", "http://www.unicode.org/")
-  //languageRequest.withCredentials = true;
+  languageRequest.open("GET", "http://localhost/zmojify/languages/" + languages[languageIndex][0] + ".xml", true);
   languageRequest.send();
 }
 
-function query (search, language) {
+function search (search, language) {
+  emojiListAll = currentLanguageData.getElementsByTagName("annotation");
+  searchEmojiList = [];
 
+  for (i = 0; i < emojiListAll.length; i++) {
+    searchTotalMatch = false;
+    searchPartialMatch = false;
+    emojiTags = [];
+    if (emojiListAll[i].getAttribute("type") != null && emojiListAll[i].getAttribute("type") == "tts") {
+      emojiTags.push(emojiListAll[i].innerHTML)
+    } else {
+      emojiTags = emojiListAll[i].innerHTML.split(" | ");
+    }
+    for (j = 0; j < emojiTags.length; j++) {
+      if (search == emojiTags[j]) {
+        searchTotalMatch = true;
+      } else if (emojiTags[j].startsWith(search)) {
+        searchPartialMatch = true;
+      }
+    }
+    if (searchTotalMatch) {
+      searchEmojiList.unshift(emojiListAll[i].getAttribute("cp"));
+    } else if (searchPartialMatch) {
+      searchEmojiList.push(emojiListAll[i].getAttribute("cp"));
+    }
+  }
+  return searchEmojiList;
 }
+
+function printEmojiNames(n) {
+  for (i = 0; i < n; i++) {
+    console.log(currentLanguageData.getElementsByTagName("annotation")[i].innerHTML)
+  }
+}
+
+function handleKeyPress (event, query) {
+  //var eventWhich = event.which;
+  console.log(event.which);
+  var selected_emoji = document.getElementById("emoji-select");
+  if (event.which == 38) { // up arrow key
+    console.log(selected_emoji);
+    console.log(selected_emoji.innerHTML);
+    selected_emoji.previousElementSibling.previousElementSibling.id = "emoji-select";
+    selected_emoji.id = "emoji-deselect";
+  } else if (event.which == 40) { // down arrow key
+    console.log(selected_emoji);
+    console.log(selected_emoji.innerHTML);
+    selected_emoji.nextElementSibling.nextElementSibling.id = "emoji-select";
+    selected_emoji.id = "emoji-deselect";
+  } else {
+      console.log(search(query, "en"));
+  }
+}
+
+getLanguageData(15);

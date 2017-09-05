@@ -1,0 +1,84 @@
+.text {
+  color: #FF5A79;
+  font-family: 'Roboto Slab', 'NotoColorEmoji', serif;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: default;
+}
+
+body {
+  background-color: #1B2B34;
+}
+h1 {
+  font-size: 50px;
+  text-align: center;
+}
+h2 {
+  font-size: 40px;
+}
+p#about {
+  font-size: 20px
+}
+a:link {
+  text-decoration: none
+}
+a:visited {
+  color: inherit;
+}
+a:hover {
+  text-decoration: underline;
+}
+a {
+  outline: none;
+}
+input[type="text"] {
+  font-family: 'Roboto Slab';
+  font-size: 40px;
+  color: #FFFFFF;
+  background-color: #33434C;
+  border-style: none;
+  border-radius: 4px;
+}
+button[type="text"] {
+  font-family: 'Roboto Slab';
+  font-size: 40px;
+  color: #FFFFFF;
+  background-color: #33434C;
+  border-style: none;
+  border-radius: 4px;
+}
+#emoji-select {
+  background-color: #33434C;
+}
+
+div.inline {
+  float: right;
+  vertical-align: 20px;
+}
+.emoji-deselect {
+
+}
+
+#output {
+  font-family: NotoColorEmoji;
+}
+
+@font-face {
+    font-family: NotoColorEmoji;
+    src: url("./fonts/NotoColorEmoji.ttf") format('truetype');
+}
+
+select {
+  background-color: #33434C;
+  color: #FFFFFF;
+  border-style: none;
+  font-family: 'Roboto Slab';
+  padding-right: -10px;
+  margin-right: 10px;
+  overflow: hidden;
+  border-radius: 4px;
+}

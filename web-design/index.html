@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="./search.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
+  <meta charset="utf-8">
+  <script
+    src="./zmojify.js"
+    crossorigin="anonymous"></script>
+  <title>
+    zmojify.io
+  </title>
+</head>
+<body>
+  <h1 class="text">zmojify.io</h1>
+  <div style="text-align:center">
+    <h2>
+      <br><br><br><br><span class="text">Search</span>
+      <input id="search" type="text" value="" autocomplete="off" placeholder="emoji" onkeyup="javascript:handleKeyPress(event,this.value);" autofocus></input>
+      <button style="float: none; vertical-align: inherit" type="text" id="btn" data-clipboard-target=#output>Copy</button>
+    </h2>
+    <h2>
+      <ul id="output">
+
+      </ul>
+    </h2>
+  </div>
+  <div id="about" style="bottom: 5px; position: absolute; width: 99%;">
+    <p class="text" id="about" style="text-align: left">
+      <a href="https://github.com/zachbwh/zmojify" target="_blank" class="text">About / GitHub</a>
+      <span style="float: right">
+        <select id="languages" onchange="getLanguageData(document.getElementById('languages').selectedIndex)">
+        </select>
+        © Zach Huxford, May 2017</span>
+    </p>
+  </div>
+</body>
+<script>
+  populateLanguageList();
+</script>
+</html>

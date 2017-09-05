@@ -16,6 +16,7 @@ public class Input {
 	public Hashtable<String, Emoji> emojis = new Hashtable<String, Emoji>();
 
 	public Hashtable<String, String> _commands = new Hashtable<String, String>();
+	public String _emojiString = null;
 	
 	public void buildEmojiHashtable(String filepath) {
 		try {
@@ -83,7 +84,8 @@ public class Input {
 				String search = inputArgs[2];
 				Search searchInstance = new Search();
 				searchInstance.zmojiSearch(this.emojis, search);
-				searchInstance.printFoundEmojis();
+				//searchInstance.printFoundEmojis();
+				_emojiString = searchInstance.stringFoundEmojis();
 			}
 			break;
 		case "-h":

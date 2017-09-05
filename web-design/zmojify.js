@@ -1,6 +1,8 @@
 
 currentLanguage = ["en", "English"]
 currentLanguageData = "";
+currntEmojis = [];
+visibleEmojis = [];
 
 languages = [
   ["af", "Afrikaans"],
@@ -96,7 +98,8 @@ function getLanguageData(languageIndex) {
       var languageData = parser.parseFromString(this.responseText,"text/xml");
       languages[languageIndex][2] = languageData;
       currentLanguageData = languageData;
-      console.log("success apparently")
+      console.log("hey");
+      console.log(languageIndex);
     }
   }
   languageRequest.open("GET", "http://zmojify.io/languages/" + languages[languageIndex][0] + ".xml", true);
@@ -106,30 +109,48 @@ function getLanguageData(languageIndex) {
 function search (search, language) {
   emojiListAll = currentLanguageData.getElementsByTagName("annotation");
   searchEmojiList = [];
+  search = search.toLowerCase();
 
-  for (i = 0; i < emojiListAll.length; i++) {
-    searchTotalMatch = false;
-    searchPartialMatch = false;
-    emojiTags = [];
-    if (emojiListAll[i].getAttribute("type") != null && emojiListAll[i].getAttribute("type") == "tts") {
-      emojiTags.push(emojiListAll[i].innerHTML)
-    } else {
-      emojiTags = emojiListAll[i].innerHTML.split(" | ");
-    }
-    for (j = 0; j < emojiTags.length; j++) {
-      if (search == emojiTags[j]) {
-        searchTotalMatch = true;
-      } else if (emojiTags[j].startsWith(search)) {
-        searchPartialMatch = true;
+  if (search === "" || search == null) {
+    for (i = 0; i < emojiListAll.length; i++) {
+      searchTotalMatch = false;
+      searchPartialMatch = false;
+      emojiTags = [];
+      if (emojiListAll[i].getAttribute("type") != null && emojiListAll[i].getAttribute("type") == "tts") {
+        emojiTags.push(emojiListAll[i].innerHTML)
+      } else {
+        emojiTags = emojiListAll[i].innerHTML.split(" | ");
       }
-    }
-    if (searchTotalMatch) {
-      searchEmojiList.unshift(emojiListAll[i].getAttribute("cp"));
-    } else if (searchPartialMatch) {
-      searchEmojiList.push(emojiListAll[i].getAttribute("cp"));
+      for (j = 0; j < emojiTags.length; j++) {
+        if (search == emojiTags[j].toLowerCase()) {
+          searchTotalMatch = true;
+        } else if (emojiTags[j].toLowerCase().startsWith(search)) {
+          searchPartialMatch = true;
+        }
+      }
+      //console.log(searchEmojiList.length);
+
+      if (searchTotalMatch /*&& !containsEmoji(searchEmojiList, emojiListAll[i].getAttribute("cp"))*/) {
+        searchEmojiList.unshift(emojiListAll[i].getAttribute("cp"));
+      } else if (searchPartialMatch /*&& !containsEmoji(searchEmojiList, emojiListAll[i].getAttribute("cp"))*/) {
+        searchEmojiList.push(emojiListAll[i].getAttribute("cp"));
+      }
     }
   }
   return searchEmojiList;
+}
+
+function containsEmoji (emojiArray, emoji) {
+  console.log(emojiArray);
+  console.log(emoji);
+  for (i = 0; i < emojiArray.length; i++) {
+    console.log(i);
+    if (emojiArray[i] === emoji) {
+      console.log("emoji: " + emoji + " exists");
+      return true;
+    }
+  }
+  return false;
 }
 
 function printEmojiNames(n) {
@@ -139,23 +160,29 @@ function printEmojiNames(n) {
 }
 
 function handleKeyPress (event, query) {
-  //var eventWhich = event.which;
-  console.log(event.which);
+  //console.log(event.which);
   var selected_emoji = document.getElementById("emoji-select");
   if (event.which == 38) { // up arrow key
-    console.log(selected_emoji);
-    console.log(selected_emoji.innerHTML);
-    selected_emoji.previousElementSibling.previousElementSibling.id = "emoji-select";
-    selected_emoji.id = "emoji-deselect";
   } else if (event.which == 40) { // down arrow key
-    console.log(selected_emoji);
-    console.log(selected_emoji.innerHTML);
-    selected_emoji.nextElementSibling.nextElementSibling.id = "emoji-select";
-    selected_emoji.id = "emoji-deselect";
   } else {
       results = search(query, "en");
       document.getElementById("output").innerHTML = results[0];
   }
+}
+
+function displayEmojis () {
+
+}
+
+function populateLanguageList() {
+  var selectBox = document.getElementById("languages");
+  for (i = 0; i < languages.length; i++) {
+    var newLanguage = document.createElement("option");
+    newLanguage.innerHTML = languages[i][1];
+    newLanguage.value = languages[i][0];
+    selectBox.add(newLanguage);
+  }
+  selectBox.value = currentLanguage[0];
 }
 
 getLanguageData(15);

@@ -13,6 +13,15 @@ public class Search {
 			System.out.println(emoji.getEmojiChar());
 		}
 	}
+
+	public String stringFoundEmojis() {
+		String foundEmojisString = "";
+		for (Emoji emoji: _foundEmojis) {
+			foundEmojisString = foundEmojisString + "\n" + emoji.getEmojiChar();
+		}
+		System.out.println(foundEmojisString);
+		return foundEmojisString;
+	}
 	
 	public void zmojiSearch(Hashtable<String, Emoji> emojiList, String search) {
 		keywordPerfectMatch(emojiList, search);

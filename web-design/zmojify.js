@@ -111,7 +111,7 @@ function search (search, language) {
   searchEmojiList = [];
   search = search.toLowerCase();
 
-  if (search === "" || search == null) {
+  if (search != "" || search != null) {
     for (i = 0; i < emojiListAll.length; i++) {
       searchTotalMatch = false;
       searchPartialMatch = false;

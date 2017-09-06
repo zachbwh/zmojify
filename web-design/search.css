@@ -65,7 +65,7 @@ div.inline {
 
 #output {
   /*font-family: NotoEmoji-Regular;*/
-  font-family: "SegoeUIEmoji", "AppleColorEmoji", "NotoColorEmoji";/*, Times, Symbola, Aegyptus, Code2000, Code2001, Code2002, Musica, serif, LastResort;*/
+  font-family: "SegoeUIEmoji", "NotoColorEmoji";/*, Times, Symbola, Aegyptus, Code2000, Code2001, Code2002, Musica, serif, LastResort;*/
 }
 
 @font-face {
@@ -73,10 +73,10 @@ div.inline {
     src: url("./fonts/NotoColorEmoji.ttf") format('truetype');
 }
 
-@font-face {
+/*@font-face {
     font-family: AppleColorEmoji;
     src: url("./fonts/Apple Color Emoji.ttf") format('truetype');
-}
+}*/
 
 @font-face {
     font-family: SegoeUIEmoji;

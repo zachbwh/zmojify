@@ -98,8 +98,6 @@ function getLanguageData(languageIndex) {
       var languageData = parser.parseFromString(this.responseText,"text/xml");
       languages[languageIndex][2] = languageData;
       currentLanguageData = languageData;
-      console.log("hey");
-      console.log(languageIndex);
     }
   }
   languageRequest.open("GET", "http://zmojify.io/languages/" + languages[languageIndex][0] + ".xml", true);
@@ -108,10 +106,11 @@ function getLanguageData(languageIndex) {
 
 function search (search, language) {
   emojiListAll = currentLanguageData.getElementsByTagName("annotation");
-  searchEmojiList = [];
+  searchEmojiListExact = [];
+  searchEmojiListPartial = [];
   search = search.toLowerCase();
 
-  if (search != "" || search != null) {
+  if (search != "" && search != null) {
     for (i = 0; i < emojiListAll.length; i++) {
       searchTotalMatch = false;
       searchPartialMatch = false;
@@ -131,22 +130,19 @@ function search (search, language) {
       //console.log(searchEmojiList.length);
 
       if (searchTotalMatch /*&& !containsEmoji(searchEmojiList, emojiListAll[i].getAttribute("cp"))*/) {
-        searchEmojiList.unshift(emojiListAll[i].getAttribute("cp"));
+        searchEmojiListExact.push(emojiListAll[i].getAttribute("cp"));
       } else if (searchPartialMatch /*&& !containsEmoji(searchEmojiList, emojiListAll[i].getAttribute("cp"))*/) {
-        searchEmojiList.push(emojiListAll[i].getAttribute("cp"));
+        searchEmojiListPartial.push(emojiListAll[i].getAttribute("cp"));
       }
     }
   }
+  searchEmojiList = searchEmojiListExact.concat(searchEmojiListPartial);
   return searchEmojiList;
 }
 
 function containsEmoji (emojiArray, emoji) {
-  console.log(emojiArray);
-  console.log(emoji);
   for (i = 0; i < emojiArray.length; i++) {
-    console.log(i);
     if (emojiArray[i] === emoji) {
-      console.log("emoji: " + emoji + " exists");
       return true;
     }
   }
@@ -166,12 +162,23 @@ function handleKeyPress (event, query) {
   } else if (event.which == 40) { // down arrow key
   } else {
       results = search(query, "en");
-      document.getElementById("output").innerHTML = results[0];
+      if (results.length != 0) {
+        displayEmojis(results);
+        //document.getElementById("output").innerHTML = results[0];
+      } else {
+        document.getElementById("output").innerHTML = "";
+      }
+
   }
 }
 
-function displayEmojis () {
-
+function displayEmojis (emojiArray) {
+  document.getElementById("output").innerHTML = "";
+  for (i = 0; i < emojiArray.length; i++) {
+    var newElement = document.createElement('li');
+    newElement.appendChild(document.createTextNode(emojiArray[i]));
+    document.getElementById("output").appendChild(newElement);
+  }
 }
 
 function populateLanguageList() {
@@ -183,6 +190,9 @@ function populateLanguageList() {
     selectBox.add(newLanguage);
   }
   selectBox.value = currentLanguage[0];
+  //selectBox.disabled = true;
+  selectBox.show = true;
 }
 
 getLanguageData(15);
+new Clipboard('.btn');

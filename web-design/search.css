@@ -64,12 +64,17 @@ div.inline {
 }
 
 #output {
-  font-family: NotoColorEmoji;
+  font-family: NotoEmoji-Regular;
 }
 
 @font-face {
     font-family: NotoColorEmoji;
     src: url("./fonts/NotoColorEmoji.ttf") format('truetype');
+}
+
+@font-face {
+    font-family: NotoEmoji-Regular;
+    src: url("./fonts/NotoEmoji-Regular.ttf") format('truetype');
 }
 
 select {
@@ -81,4 +86,13 @@ select {
   margin-right: 10px;
   overflow: hidden;
   border-radius: 4px;
+  outline: none;
+}
+
+ul {
+  list-style-type: none;
+}
+
+div#emojisList {
+  background-color: #33434C;
 }

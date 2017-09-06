@@ -4,6 +4,7 @@
   <link href="./search.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
   <meta charset="utf-8">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js"></script>
   <script
     src="./zmojify.js"
     crossorigin="anonymous"></script>
@@ -20,9 +21,11 @@
       <button style="float: none; vertical-align: inherit" type="text" id="btn" data-clipboard-target=#output>Copy</button>
     </h2>
     <h2>
-      <ul id="output">
+      <div id="emojisList">
+        <ul id="output">
 
-      </ul>
+        </ul>
+      </div>
     </h2>
   </div>
   <div id="about" style="bottom: 5px; position: absolute; width: 99%;">

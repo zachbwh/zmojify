@@ -1,0 +1,71 @@
+<html>
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
+  <meta charset="utf-8">
+  <script src="./zmojify.js"></script>
+  <title>
+    zmojify.io
+  </title>
+  <style type="text/css">
+  body {
+    margin: 10px;
+    white-space: nowrap;
+    background-color: #1B2B34;
+    font-family: 'Roboto Slab';
+    color: #FF5A79;
+
+    text-align: center;
+    align-items: center;
+    width: 400px;
+  }
+
+  h1 {
+    font-size: 25px;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+
+  input {
+    font-size: 20px;
+    background-color: #33434C;
+    color: #FFFFFF;
+    font-family: 'Roboto Slab';
+    border-style: none;
+    border-radius: 4px;
+  }
+
+  select {
+    font-size: 20px;
+    font-family: SegoeUIEmoji;
+    background-color: #33434C;
+  }
+
+  #output {
+    font-family: SegoeUIEmoji;
+  }
+
+  @font-face {
+      font-family: SegoeUIEmoji;
+      src: url("./fonts/seguiemj.ttf") format('truetype');
+  }
+</style>
+
+</head>
+<body>
+  <h1>zmojify.io <span id="output" style="float: right;">🙈</span></h1>
+  <div>
+    <h2 style="float: left;">
+      Search
+      <input id="search" type="text" value="" autocomplete="off" placeholder="emoji" autofocus></input>
+    </h2>
+    <h2 style="float: right;">
+      <select id="output">
+        <option>🙈</option>
+        <option>💦</option>
+        <option>🍆</option>
+      </select>
+    </h2>
+</body>
+</html>
